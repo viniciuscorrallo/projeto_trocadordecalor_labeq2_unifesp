@@ -1,0 +1,75 @@
+import math
+
+# Constantes
+cp_agua = 4184       # J/(kg*K)
+rho_agua = 997.3     # kg/m³
+
+# Funções auxiliares
+def area_troca(D, L):
+    return math.pi * D * L
+
+def vazao_massica(volume_ml, tempo_s, rho=rho_agua):
+    volume_m3 = volume_ml / 1000 / 1000   # Conversão de ml Para m^3
+    vazao_vol = volume_m3 / tempo_s       # Vazão Volumetrica (m^3/s)
+    return vazao_vol * rho                # Vazão másssica (kg/s)
+
+def deltaTml(Tq_e, Tq_s, Tf_e, Tf_s, tipo="contracorrente"):
+    if tipo == "contracorrente":
+        dT1 = Tq_e - Tf_s
+        dT2 = Tq_s - Tf_e
+    else:  # paralelo
+        dT1 = Tq_e - Tf_e
+        dT2 = Tq_s - Tf_s
+    return (dT1 - dT2) / math.log(dT1/dT2)
+
+def Q_f(vazao, cp, Tf_e, Tf_s):
+    return vazao * cp * (Tf_s - Tf_e)
+
+def U_exp(Q, A, dTml):
+    return Q / (A * dTml)
+
+# Inputs
+Dinput = input("Insira o diametro do tubo interno (m): ").replace(",", ".")
+D = float(Dinput)
+
+Linput = input("Insira o comprimento do tubo interno (m): ").replace(",", ".")
+L = float(Linput)
+
+A = area_troca(D, L)
+
+volume_ml_input = input("Insira a medida experimental de volume (ml): ").replace(",", ".")
+volume_ml = float(volume_ml_input)
+
+tempo_s_input = input(f'Insira o tempo necessário para atigir o volume experimental (s) (Volume medido: {volume_ml} ml): ').replace(",", ".")
+tempo_s = float(tempo_s_input)
+
+vazao_frio = vazao_massica(volume_ml, tempo_s)
+
+tipo_trocador = input("Qual o tipo de trocador? (contracorrrente ou paralelo): ")
+
+Tq_e_input = input("Insira a temperatura de entrada do fluido quente (°C): ").replace(",", ".")
+Tq_e = float(Tq_e_input)
+
+Tq_s_input = input("Insira a temperatura de saida do fluido quente (°C): ").replace(",", ".")
+Tq_s = float(Tq_s_input)
+
+Tf_e_input = input("Insira a temperatura de entrada do fluido frio (°C): ").replace(",", ".")
+Tf_e = float(Tf_e_input)
+
+Tf_s_input = input("Insira a temperatura de saida do fluido frio (°C): ").replace(",", ".")
+Tf_s = float(Tf_s_input)
+
+#Cálculos
+dTml = deltaTml(Tq_e, Tq_s, Tf_e, Tf_s, tipo_trocador)
+Q = Q_f(vazao_frio, cp_agua, Tf_e, Tf_s)
+U = U_exp(Q, A, dTml)
+
+#Saidas
+print('')
+print('')
+print(f'Resultados para trocador {tipo_trocador}')
+print(f"Área de troca = {A:.4f} m²")
+print(f"Vazão fria = {vazao_frio:.4f} kg/s")
+print(f"ΔTml = {dTml:.2f} °C")
+print(f"Q = {Q:.2f} W")
+print(f"Uexp = {U:.2f} W/m²°C")

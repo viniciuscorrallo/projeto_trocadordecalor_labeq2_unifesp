@@ -1,14 +1,10 @@
 import math
 
-# Constantes
-cp_agua = 4184       # J/(kg*K)
-rho_agua = 997.3     # kg/m³
-
 # Funções auxiliares
 def area_troca(D, L):
     return math.pi * D * L
 
-def vazao_massica(volume_ml, tempo_s, rho=rho_agua):
+def vazao_massica(volume_ml, tempo_s, rho):
     volume_m3 = volume_ml / 1000 / 1000   # Conversão de ml Para m^3
     vazao_vol = volume_m3 / tempo_s       # Vazão Volumetrica (m^3/s)
     return vazao_vol * rho                # Vazão másssica (kg/s)
@@ -29,39 +25,35 @@ def U_exp(Q, A, dTml):
     return Q / (A * dTml)
 
 # Inputs
-Dinput = input("Insira o diametro do tubo interno (m): ").replace(",", ".")
-D = float(Dinput)
+cp = float(input("Qual a calor específico do liquído (J/(kg*K)): ").replace(",", "."));
 
-Linput = input("Insira o comprimento do tubo interno (m): ").replace(",", ".")
-L = float(Linput)
+rho = float(input("Qual a massa específica do liquído (kg/m³): ").replace(",", "."));
+
+D = float(input("Insira o diametro do tubo interno (m): ").replace(",", "."));
+
+L = float(input("Insira o comprimento do tubo interno (m): ").replace(",", "."));
 
 A = area_troca(D, L)
 
-volume_ml_input = input("Insira a medida experimental de volume (ml): ").replace(",", ".")
-volume_ml = float(volume_ml_input)
+volume_ml = float(input("Insira a medida experimental de volume (ml): ").replace(",", "."));
 
-tempo_s_input = input(f'Insira o tempo necessário para atigir o volume experimental (s) (Volume medido: {volume_ml} ml): ').replace(",", ".")
-tempo_s = float(tempo_s_input)
+tempo_s = float(input(f'Insira o tempo necessário para atigir o volume experimental (s) (Volume medido: {volume_ml} ml): ').replace(",", "."));
 
-vazao_frio = vazao_massica(volume_ml, tempo_s)
+vazao_frio = vazao_massica(volume_ml, tempo_s, rho)
 
 tipo_trocador = input("Qual o tipo de trocador? (contracorrrente ou paralelo): ")
 
-Tq_e_input = input("Insira a temperatura de entrada do fluido quente (°C): ").replace(",", ".")
-Tq_e = float(Tq_e_input)
+Tq_e = float(input("Insira a temperatura de entrada do fluido quente (°C): ").replace(",", "."));
 
-Tq_s_input = input("Insira a temperatura de saida do fluido quente (°C): ").replace(",", ".")
-Tq_s = float(Tq_s_input)
+Tq_s = float(input("Insira a temperatura de saida do fluido quente (°C): ").replace(",", "."));
 
-Tf_e_input = input("Insira a temperatura de entrada do fluido frio (°C): ").replace(",", ".")
-Tf_e = float(Tf_e_input)
+Tf_e = float(input("Insira a temperatura de entrada do fluido frio (°C): ").replace(",", "."));
 
-Tf_s_input = input("Insira a temperatura de saida do fluido frio (°C): ").replace(",", ".")
-Tf_s = float(Tf_s_input)
+Tf_s = float(input("Insira a temperatura de saida do fluido frio (°C): ").replace(",", "."));
 
 #Cálculos
 dTml = deltaTml(Tq_e, Tq_s, Tf_e, Tf_s, tipo_trocador)
-Q = Q_f(vazao_frio, cp_agua, Tf_e, Tf_s)
+Q = Q_f(vazao_frio, cp, Tf_e, Tf_s)
 U = U_exp(Q, A, dTml)
 
 #Saidas

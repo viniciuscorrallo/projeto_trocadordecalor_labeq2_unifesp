@@ -16,7 +16,7 @@ __fornecendo uma análise completa da sua eficiência sob diversas condições._
 
 ## TUBO DUPLO OU BITUBULAR
 
-__O modelo mais simples de trocador de calor é o chamado trocador de tubo duplo, que consiste essencialmente em dois tubos concêntricos, em que um dos fluidos escoa pelo tubo de diâmetro menor e o outro escoa pelo espaço anular entre os dois tubos. Geralmente, este tipo de trocador apresenta dois trechos retos com conexões nas extremidades dos tubos, como pode ser observado na Figura 1.6__
+__O modelo mais simples de trocador de calor é o chamado trocador de tubo duplo, que consiste essencialmente em dois tubos concêntricos, em que um dos fluidos escoa pelo tubo de diâmetro menor e o outro escoa pelo espaço anular entre os dois tubos. Geralmente, este tipo de trocador apresenta dois trechos retos com conexões nas extremidades dos tubos, como pode ser observado na Figura 1__
 
 Figura 1 — Trocador de calor tubo duplo
 

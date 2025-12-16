@@ -22,4 +22,4 @@ Figura 1 — Trocador de calor tubo duplo
 
 <img width="612" height="130" alt="image" src="https://github.com/user-attachments/assets/cd571dca-ac8c-4f7c-83bf-a5b2df81202f" />
 
-Fonte: Araújo (2002, p. 7).
+Fonte: ARAÚJO, E. C. da C. Trocador de Calor. 1. ed. São Carlos: Editora da Universidade Federal de São Carlos (EdUFSCar), 2002.

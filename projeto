@@ -25,7 +25,7 @@ def U_exp(Q, A, dTml):
     return Q / (A * dTml)
 
 # Inputs
-cp = float(input("Qual a calor específico do liquído (J/(kg*K)): ").replace(",", "."));
+cp = float(input("Qual o calor específico do liquído (J/(kg*K)): ").replace(",", "."));
 
 rho = float(input("Qual a massa específica do liquído (kg/m³): ").replace(",", "."));
 
@@ -65,3 +65,4 @@ print(f"Vazão fria = {vazao_frio:.4f} kg/s")
 print(f"ΔTml = {dTml:.2f} °C")
 print(f"Q = {Q:.2f} W")
 print(f"Uexp = {U:.2f} W/m²°C")
+
